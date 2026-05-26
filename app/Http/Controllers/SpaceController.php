@@ -35,6 +35,16 @@ class SpaceController extends Controller
 }
 
 
+    public function welcome()
+    {
+        $featuredSpaces = \App\Models\Space::with('images')
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('welcome', compact('featuredSpaces'));
+    }
+
    public function show(Space $space)
 {
     $space->load(['category','user','images','reviews.user']);

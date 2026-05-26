@@ -16,15 +16,7 @@ use App\Http\Controllers\ReviewController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-
-    $featuredSpaces = \App\Models\Space::with('images')
-        ->latest()
-        ->take(3)
-        ->get();
-
-    return view('welcome', compact('featuredSpaces'));
-});
+Route::get('/', [SpaceController::class, 'welcome'])->name('home');
 
 
 /*

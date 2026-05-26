@@ -1,0 +1,33 @@
+# ============================================================
+# .dockerignore - Exclude unnecessary files from Docker build
+# ============================================================
+
+.git
+.gitignore
+.gitattributes
+.env
+.env.backup
+.env.production
+.env.local
+.editorconfig
+node_modules
+.idea
+.vscode
+.fleet
+.nova
+.zed
+.phpunit.cache
+.phpunit.result.cache
+phpunit.xml
+README.md
+aicodebrdige.md
+Homestead.json
+Homestead.yaml
+tests
+*.log
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+database/placerent_backup.sql

@@ -1,0 +1,12 @@
+# PlaceRent - Railway Deployment Config
+# This file configures Railway to deploy the Laravel app
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "php artisan config:cache && php artisan migrate --force && apache2-foreground"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
