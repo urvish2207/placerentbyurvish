@@ -1,0 +1,86 @@
+services:
+  # PHP/Laravel Web Service
+  - type: web
+    name: placerent-app
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    branch: main
+    region: singapore
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: PlaceRent
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        value: base64:o54dlIjHPGG/6o5kCB2S7SxE+qexS8W7tPiusGfUWkE=
+      - key: APP_URL
+        fromService:
+          type: web
+          name: placerent-app
+          property: host
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: placerent-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: placerent-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: placerent-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: placerent-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: placerent-db
+          property: password
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        value: sandbox.smtp.mailtrap.io
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        value: 19bef8702c99a1
+      - key: MAIL_PASSWORD
+        value: 039e0e5b9b0574
+      - key: MAIL_ENCRYPTION
+        value: tls
+      - key: MAIL_FROM_ADDRESS
+        value: mistriurvish@gmail.com
+      - key: MAIL_FROM_NAME
+        value: PlaceRent
+      - key: STRIPE_KEY
+        sync: false
+      - key: STRIPE_SECRET
+        sync: false
+
+  # MySQL Database
+databases:
+  - name: placerent-db
+    plan: free
+    databaseName: placerent
+    user: placerent_user
+    region: singapore
